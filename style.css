@@ -9,7 +9,7 @@ body {
 
 * {
     box-sizing: border-box;
-    -webkit-appearance:none;
+    -webkit-appearance: none;
 }
 
 html {
@@ -21,13 +21,17 @@ img {
     height: auto;
     width: 100%;
 }
-ul{
-    margin:0;
-    padding:0;
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 a {
     text-decoration: none;
     color: #000;
+    transition: all 0.2s ease-out;
 }
 
 header {
@@ -37,17 +41,19 @@ header {
     font-family: Inter;
     font-size: 24px;
     font-weight: 400;
-    line-height: 29px;
+    /* line-height: 29px; */
     letter-spacing: 0em;
     text-align: center;
 }
 
 #hamburgerMenu {
-    width: 20px;
-    height: 20px;
+    /* width: 20px; */
+    /* height: 20px; */
     /* background: url(../images/menuIcon.svg) no-repeat; */
     cursor: pointer;
     z-index: 10;
+    margin: 0 10px 0 0;
+    vertical-align: top;
 }
 
 .logo {
@@ -63,9 +69,10 @@ header {
     width: 100vw;
     z-index: 9;
 }
+
 .menuAndProfile ul li a.active,
-.menuAndProfile ul li a:hover{
-   border-bottom: 1px solid;
+.menuAndProfile ul li a:hover {
+    border-bottom: 1.5px solid;
 }
 
 
@@ -87,6 +94,7 @@ header h1 {
     grid-template-columns: auto auto auto;
     margin: 20px auto 35px;
 }
+
 /* .searchBar.show{
     display: grid;
 } */
@@ -114,7 +122,7 @@ header nav {
     display: list-item;
     margin: 150px auto 0;
     text-align: center;
-    padding:0;
+    padding: 0;
     list-style: none;
 }
 
@@ -125,24 +133,31 @@ ul#experiencesCard,
     list-style: none;
     gap: 20px;
 }
+
 ul#cityCards li {
-   border-radius: 5px;
-   background: red;
-   padding: 0 0 120px;
+    border-radius: 5px;
+    background: #CC2D4A;
+    padding: 0 0 120px;
 }
-ul#cityCards li img{
-   border-radius: 5px 5px 0 0;
+
+ul#cityCards li img {
+    border-radius: 5px 5px 0 0;
 }
+
 .menuList ul li {
     margin: 45px;
     font-size: 25px;
 }
-.futureGatewaysDetails, #slider{
-   display: none;
+
+.futureGatewaysDetails,
+#slider {
+    display: none;
 }
-.futureGatewaysDetails.active{
+
+.futureGatewaysDetails.active {
     display: grid;
- }
+}
+
 img.profilePic {
     width: 35px;
     height: 35px;
@@ -154,10 +169,11 @@ img.profilePic {
 span.welcomeText {
     position: absolute;
     top: 50%;
-    left: 35%;
+    left: 50%;
     max-width: 100%;
     transform: translate(-50%, -50%);
     color: #fff;
+    text-align: center;
     font-size: 24px;
     font-weight: 700;
     letter-spacing: 0px;
@@ -171,6 +187,16 @@ span.welcomeText {
 
 section#banner {
     position: relative;
+}
+
+section#banner img {
+    border-radius: 10px;
+}
+
+.menuAndProfile li a,
+#becomeAHost a {
+    font-size: 16px;
+    padding: 5px;
 }
 
 .searchBar input {
@@ -187,29 +213,141 @@ section#banner {
 button {
     font-family: 'Poppins';
     font-weight: 500;
+    -webkit-appearance: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 0.5s ease-out;
 }
 
 .searchBar input:focus {
     outline: none;
 }
 
-.filters {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0 auto 0 0;
-    gap: 7px;
+#experiencesCard li img {
+    border-radius: 10px;
 }
 
+#experiencesCard li {
+    position: relative;
+}
 
+#experiencesCard li .experiencesDetails {
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    /* width:100%; */
+    transform: translateY(-10%);
+}
+
+i.fa-solid.fa-user {
+    font-size: 18px;
+}
+
+span.cityName {
+    display: block;
+    font-size: 26px;
+    color: #fff;
+    font-weight: 600;
+}
+
+span.distance {
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.cityDescription {
+    padding: 20px;
+}
+
+ul#cityCards li:nth-child(2) {
+    background: #BC1A6E;
+}
+
+ul#cityCards li:nth-child(3) {
+    background: #DE3151;
+}
+
+ul#cityCards li:nth-child(4) {
+    background: #D93B30;
+}
+
+section#inspoForNextTrip,
+section#shopAirbnb {
+    margin: 80px auto;
+}
+
+section#shopAirbnb .secTitle {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+section#shopAirbnb {
+    justify-content: space-between;
+}
+
+button.learnMore {
+    background: #000;
+    color: #fff;
+}
+
+#aboutHosting img {
+    border-radius: 8px;
+}
+
+#aboutHosting {
+    position: relative;
+}
+
+#aboutHosting span.welcomeText {
+    font-size: 65px;
+    text-align: left;
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+#inspoForFutureGateways {
+    margin: 80px auto;
+}
+
+footer {
+    background: #F9FAFB
+}
+
+span.thingsTodo {
+    color: #fff;
+    font-size: 40px;
+    display: block;
+    margin: 0 0 20px 0;
+}
+
+button.bannerBtn {
+    border-radius: 20px;
+    background: linear-gradient(90deg, #671296 -1.23%, #9E1F83 100.62%);
+    /* position: absolute; */
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+span.btnWrapper {
+    line-height: 1;
+    background: #fff;
+    padding: 0;
+    display: inline-block;
+    font-size: initial;
+    border-radius: 20px;
+}
 
 @media only screen and (min-width:768px) {
     .desk {
         display: block;
     }
 
-    .menuAndProfile {
+    .menuAndProfile,
+    .miscLinks {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
@@ -219,6 +357,11 @@ button {
         left: auto;
         height: auto;
         width: auto;
+        align-items: center;
+    }
+
+    .miscLinks {
+        gap: 20px;
     }
 
     .menuList ul {
@@ -230,13 +373,24 @@ button {
         font-size: 13px;
         align-items: baseline;
     }
+
     .menuList ul li {
         margin: 0 10px;
         font-size: 15px;
     }
-    .menuList ul li a:hover{
-        opacity: 0.5;
+
+    #globe i {
+        cursor: pointer;
     }
+
+    .menuList ul li a:hover,
+    .miscLinks a:hover,
+    #globe i:hover,
+    #hamburgerMenu:hover,
+    button:hover {
+        opacity: 0.7;
+    }
+
     .menuList ul li:first-child {
         margin-left: 0;
     }
@@ -252,10 +406,14 @@ button {
     main {
         padding: 20px;
     }
+
     div#userName {
         position: static;
         right: auto;
         top: auto;
+        background: #DE3151;
+        padding: 8px 20px;
+        border-radius: 6px;
     }
 
     .searchBar input {
@@ -267,12 +425,6 @@ button {
         padding: 0 20px;
     }
 
-    .filters {
-        max-width: 600px;
-        align-items: flex-start;
-        margin: 0 auto 0 0;
-    }
-
     .searchBar {
         grid-template-columns: auto auto auto auto auto auto;
     }
@@ -281,15 +433,17 @@ button {
         position: relative;
         margin: 30px 0;
     }
-
-    span.welcomeText {
-        left: 20%;
-        letter-spacing: 0.5px;
-    }
 }
 
 @media only screen and (min-width:1024px) {
     span.welcomeText {
-        font-size: 35px;
+        font-size: 48px;
     }
+}
+
+ul#destinationsList {
+    display: flex;
+    gap: 25px;
+    justify-content: flex-start;
+    font-size: 15px;
 }
