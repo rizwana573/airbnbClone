@@ -5,6 +5,7 @@ body {
     background: #fff;
     color: #000;
     font-family: 'Inter', sans-serif;
+    line-height: 1;
 }
 
 * {
@@ -30,20 +31,27 @@ ul {
 
 a {
     text-decoration: none;
-    color: #000;
+    color: #fff;
     transition: all 0.2s ease-out;
 }
 
 header {
-    padding: 20px 20px 0;
+    padding: 20px 15px 0;
     width: 100%;
-    color: #000;
+    color: #fff;
     font-family: Inter;
     font-size: 24px;
     font-weight: 400;
     /* line-height: 29px; */
     letter-spacing: 0em;
     text-align: center;
+    background: #000;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 25px;
 }
 
 #hamburgerMenu {
@@ -60,7 +68,7 @@ header {
     z-index: 10;
 }
 
-.menuAndProfile {
+/* .menuAndProfile {
     position: fixed;
     background: #fff;
     top: 0;
@@ -68,11 +76,18 @@ header {
     height: 100vh;
     width: 100vw;
     z-index: 9;
-}
+} */
 
-.menuAndProfile ul li a.active,
-.menuAndProfile ul li a:hover {
-    border-bottom: 1.5px solid;
+.menuAndProfile ul li a.active:after,
+.menuAndProfile ul li a:hover:after {
+    content: "___";
+    width: 20px;
+    display: block;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    font-weight: 900;
+    transform: translateX(-50%);
 }
 
 
@@ -84,7 +99,6 @@ header h1 {
     margin: 0;
     padding: 20px;
     font-size: 24px;
-    ;
     text-transform: capitalize;
 }
 
@@ -100,22 +114,16 @@ header h1 {
 } */
 
 div#userName {
-    position: absolute;
-    right: 15px;
-    top: 30px;
-    text-align: right;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 13px;
+    position: static;
+    right: auto;
+    top: auto;
+    background: #fff;
+    padding: 8px 20px;
+    border-radius: 6px;
 }
 
-header nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: flex-start;
-    gap: 20px;
-    align-items: center;
+.menuAndProfile {
+    display: none;
 }
 
 .menuList ul {
@@ -127,21 +135,19 @@ header nav {
 }
 
 ul#cityCards,
-ul#experiencesCard,
 #shopAirbnb {
-    display: flex;
     list-style: none;
-    gap: 20px;
 }
 
 ul#cityCards li {
-    border-radius: 5px;
+    border-radius: 8px;
     background: #CC2D4A;
     padding: 0 0 120px;
+    margin: 30px 0;
 }
 
 ul#cityCards li img {
-    border-radius: 5px 5px 0 0;
+    border-radius: 8px 8px 0 0;
 }
 
 .menuList ul li {
@@ -156,6 +162,9 @@ ul#cityCards li img {
 
 .futureGatewaysDetails.active {
     display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+    margin: 40px auto 30px;
 }
 
 img.profilePic {
@@ -168,14 +177,15 @@ img.profilePic {
 
 span.welcomeText {
     position: absolute;
-    top: 50%;
+    top: auto;
     left: 50%;
+    bottom: 9%;
     max-width: 100%;
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: center;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0px;
 }
 
@@ -187,6 +197,7 @@ span.welcomeText {
 
 section#banner {
     position: relative;
+    padding: 0 0 30px;
 }
 
 section#banner img {
@@ -195,8 +206,9 @@ section#banner img {
 
 .menuAndProfile li a,
 #becomeAHost a {
-    font-size: 16px;
-    padding: 5px;
+    font-size: 12px;
+    /* padding: 5px; */
+    position: relative;
 }
 
 .searchBar input {
@@ -226,17 +238,19 @@ button {
 }
 
 #experiencesCard li img {
-    border-radius: 10px;
+    border-radius: 8px;
+    height: -webkit-fill-available;
 }
 
 #experiencesCard li {
     position: relative;
+    margin: 20px auto;
 }
 
 #experiencesCard li .experiencesDetails {
     position: absolute;
-    top: 10%;
-    left: 8%;
+    top: 15%;
+    left: 7%;
     /* width:100%; */
     transform: translateY(-10%);
 }
@@ -276,7 +290,7 @@ ul#cityCards li:nth-child(4) {
 
 section#inspoForNextTrip,
 section#shopAirbnb {
-    margin: 80px auto;
+    margin: 60px auto;
 }
 
 section#shopAirbnb .secTitle {
@@ -286,6 +300,12 @@ section#shopAirbnb .secTitle {
 
 section#shopAirbnb {
     justify-content: space-between;
+    margin: 80px auto;
+    text-align: center;
+}
+
+#shopAirbnb article {
+    margin: 20px 0;
 }
 
 button.learnMore {
@@ -293,20 +313,22 @@ button.learnMore {
     color: #fff;
 }
 
-#aboutHosting img {
-    border-radius: 8px;
-}
-
 #aboutHosting {
+    height: 100vh;
+    background: url(./images/hosting.jpeg) no-repeat;
     position: relative;
+    background-position: center 61%;
+    background-size: cover;
+    border-radius: 8px;
 }
 
 #aboutHosting span.welcomeText {
     font-size: 65px;
     text-align: left;
-    top: 30%;
-    left: 20%;
+    top: 20%;
+    left: 45%;
     transform: translate(-50%, -50%);
+    bottom: auto;
 }
 
 #inspoForFutureGateways {
@@ -314,7 +336,19 @@ button.learnMore {
 }
 
 footer {
-    background: #F9FAFB
+    background: #F9FAFB;
+    padding: 40px 15px;
+}
+
+section#lowerFooter article:last-child {
+    gap: 20px;
+    display: flex;
+}
+
+section#lowerFooter article:first-child {
+    display: flex;
+    gap: 5px;
+    margin: 0 0 20px 0;
 }
 
 span.thingsTodo {
@@ -341,9 +375,110 @@ span.btnWrapper {
     border-radius: 20px;
 }
 
+ul#destinationsList {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    font-size: 15px;
+    margin: 10px auto 20px;
+    flex-wrap: wrap;
+}
+
+.futureGatewaysDetails span {
+    color: #6B7280;
+    font-size: 13px;
+}
+
+.futureGatewaysDetails li {
+    font-size: 16px;
+}
+
+#destinationsList li {
+    color: #6B7280;
+    line-height: 1.5;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+#destinationsList li:hover {
+    color: #000;
+}
+
+#destinationsList li.active {
+    color: #000;
+    border-bottom: 1px solid;
+}
+
+footer a {
+    color: rgba(75, 85, 99, 0.6);
+}
+
+footer a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+section#lowerFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0 0 0;
+    border-top: 1px solid #E5E7EB;
+    color: rgba(75, 85, 99, 0.6);
+    flex-wrap: wrap;
+}
+
+section#upperFooter {
+    padding: 0 0 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+section#upperFooter li {
+    margin: 15px auto;
+}
+
+span.seperator {
+    vertical-align: text-top;
+}
+
 @media only screen and (min-width:768px) {
     .desk {
         display: block;
+    }
+
+    footer {
+        padding: 40px;
+    }
+
+    header {
+        padding: 20px 35px 0;
+    }
+
+    #experiencesCard {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 25px;
+    }
+
+    #aboutHosting span.welcomeText {
+        top: 30%;
+        left: 25%;
+    }
+
+    ul#cityCards,
+    #shopAirbnb {
+        display: flex;
+        list-style: none;
+        gap: 20px;
+    }
+
+    ul#cityCards li,
+    #experiencesCard li,
+    #shopAirbnb article,
+    section#lowerFooter article:first-child {
+        margin: 0;
     }
 
     .menuAndProfile,
@@ -372,6 +507,10 @@ span.btnWrapper {
         padding: 0;
         font-size: 13px;
         align-items: baseline;
+    }
+
+    .futureGatewaysDetails.active {
+        grid-template-columns: auto auto auto auto;
     }
 
     .menuList ul li {
@@ -404,16 +543,7 @@ span.btnWrapper {
     }
 
     main {
-        padding: 20px;
-    }
-
-    div#userName {
-        position: static;
-        right: auto;
-        top: auto;
-        background: #DE3151;
-        padding: 8px 20px;
-        border-radius: 6px;
+        padding: 0 15px 20px;
     }
 
     .searchBar input {
@@ -421,8 +551,13 @@ span.btnWrapper {
     }
 
     header nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
         justify-content: space-between;
-        padding: 0 20px;
+        gap: 20px;
+        align-items: center;
+        margin: 0 auto;
     }
 
     .searchBar {
@@ -431,19 +566,38 @@ span.btnWrapper {
 
     section#banner {
         position: relative;
-        margin: 30px 0;
+        padding: 30px 0 65px;
+    }
+
+    footer {
+        padding: 40px 15px;
     }
 }
 
 @media only screen and (min-width:1024px) {
     span.welcomeText {
         font-size: 48px;
+        bottom: 3%;
     }
-}
 
-ul#destinationsList {
-    display: flex;
-    gap: 25px;
-    justify-content: flex-start;
-    font-size: 15px;
+    .menuAndProfile li a,
+    #becomeAHost a {
+        font-size: 16px;
+    }
+
+    ul#destinationsList {
+        gap: 35px;
+    }
+
+    #aboutHosting span.welcomeText {
+        left: 20%;
+    }
+
+    main {
+        padding: 0 40px 20px;
+    }
+
+    footer {
+        padding: 40px;
+    }
 }

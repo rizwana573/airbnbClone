@@ -25,7 +25,7 @@
             <!-- <div class="hamburgerMenu mobile"> -->
             </div>
             <div class="logo">
-                <a class="airbnbLogo" href="#"><img src="./images/airbnbLogoRed.png" alt="logo"></a>
+                <a class="airbnbLogo" href="#"><img src="./images/airbnbLogoWhite.png" alt="logo"></a>
             </div>
             <article class="menuAndProfile">
                 <ul>
@@ -91,14 +91,15 @@
             <span><i class="fa-solid fa-magnifying-glass"></i>Search</span>
             <!-- <button id="searchBtn">Search</button> -->
         </section>
-    </header>
-    <main>
         <section id="banner">
             <img class="" src="./images/bannerImage.jpg" alt="banner image">
             <!-- <img class="mobile" src="mobileBanner.png" alt="banner image"> -->
             <span class="welcomeText">Not sure where to go? Perfect.<br>
                 <span class=btnWrapper><button class="bannerBtn">I’m flexible</button></span></span>
         </section>
+    </header>
+    <main>
+        
 
         <section id="inspoForNextTrip">
             <h1 class="secTitle">Inspiration for your next trip</h1>
@@ -165,7 +166,7 @@
 
         </section>
         <section id="aboutHosting">
-            <img class="desk" src="./images/hosting.jpeg" alt="hosting image">
+            <!-- <img class="desk" src="./images/hosting.jpeg" alt="hosting image"> -->
             <!-- <img class="mobile" src="mobileBanner.png" alt="banner image"> -->
             <span class="welcomeText">Questions<br>about<br>hosting?<br>
                 <button class="abtHostingBtn">Ask a Superhost</button></span>
@@ -173,7 +174,7 @@
         <section id="inspoForFutureGateways">
             <h2>Inspiration for future getaways</h2>
             <ul id="destinationsList">
-                <li id="artsAndCulture">Destinations for arts & culture</li>
+                <li id="artsAndCulture" class="active">Destinations for arts & culture</li>
                 <li id="outdoorAdventures">Destinations for outdoor adventure</li>
                 <li id="mountainCabins">Mountain cabins</li>
                 <li id="beachDestinations">Beach destinations</li>
@@ -436,12 +437,12 @@
         </section>
         <section id="lowerFooter">
             <article>
-                <span>&copy; 2023 Airbnb, Inc. </span>
-                <span>.</span>
+                <span>&copy;<span id="year"></span> Airbnb, Inc. </span>
+                <span class="seperator">.</span>
                 <span><a href="#" target="_blank">Privacy</a></span>
-                <span>.</span>
+                <span class="seperator">.</span>
                 <span><a href="#" target="_blank">Terms</a></span>
-                <span>.</span>
+                <span class="seperator">.</span>
                 <span><a href="#" target="_blank">Sitemap</a></span>
             </article>
 

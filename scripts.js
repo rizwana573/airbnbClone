@@ -30,4 +30,7 @@ function showSearchBar(){
 document.addEventListener("DOMContentLoaded", (event) => {
     mobileMenu();
     showSearchBar();
+    const d = new Date();
+    let year = d.getFullYear();
+    document.getElementById("year").innerHTML = year;
 });
