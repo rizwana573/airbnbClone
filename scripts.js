@@ -42,8 +42,8 @@ function formSubmit(){
         localStorage.setItem("checkOut", checkOut); 
         localStorage.setItem("guests", guests); 
         localStorage.setItem("todayDate", todayDate); 
-        window.location.pathname = "/searchLanding.html"; 
-        if(window.location.pathname == "/searchLanding.html"){
+        window.location.pathname = "/airbnbClone/searchLanding.html"; 
+        if(window.location.pathname == "/airbnbClone/searchLanding.html"){
             window.location.reload();
         }     
     });    
