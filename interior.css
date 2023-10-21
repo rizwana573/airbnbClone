@@ -14,12 +14,13 @@ li.hotelDiv {
 }
 span.like {
     display: block;
-    width: 20px;
-    height: 20px;
+    /* width: 20px; */
+    /* height: 20px; */
     position: absolute;
-    top: 45%;
-    right: 0;
+    top: -30%;
+    right: 0%;
     cursor: pointer;
+    font-size: 30px;
 }
 span.like.liked {
     color: red;
@@ -61,6 +62,7 @@ h1.title {
     color: #374151;
     font-size: 18px;
     line-height: 22px;
+    margin: 10px auto 45px;
 }
 
 span.amenities {
