@@ -6,6 +6,7 @@ body {
     color: #000;
     font-family: 'Inter', sans-serif;
     line-height: 1;
+    box-sizing: border-box;
 }
 
 * {
@@ -55,28 +56,28 @@ header nav {
 }
 
 #hamburgerMenu {
-    /* width: 20px; */
-    /* height: 20px; */
-    /* background: url(../images/menuIcon.svg) no-repeat; */
     cursor: pointer;
     z-index: 10;
-    margin: 0 10px 0 0;
+    margin: 4px 10px 0 0;
     vertical-align: top;
 }
 
 .logo {
     z-index: 10;
 }
-
-/* .menuAndProfile {
-    position: fixed;
-    background: #fff;
-    top: 0;
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
     left: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: 9;
-} */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
 
 .menuAndProfile ul li a.active:after,
 .menuAndProfile ul li a:hover:after {
@@ -103,10 +104,15 @@ header h1 {
 }
 
 .searchBar {
+    color: #000;
     display: none;
-    gap: 5px;
+    gap: 15px;
+    background: #fff;
     grid-template-columns: auto auto auto;
     margin: 20px auto 35px;
+    border-radius: 30px;
+    max-width: 70%;
+    align-items: center;
 }
 
 /* .searchBar.show{
@@ -158,6 +164,32 @@ ul#cityCards li img {
 .futureGatewaysDetails,
 #slider {
     display: none;
+}
+#slider {
+    position: absolute;
+    top: 39px;
+    right: 0;
+    background: #DE3151;
+    padding: 9px;
+    border-radius: 0 0 5px 5px;
+    z-index: 10;
+    text-align: left;
+}
+#slider ul{
+   display: block;
+   margin-top: 0;
+}
+#slider ul li{
+    font-size:12px;
+    text-align: left;
+    padding: 5px;
+    margin: 0;
+}
+.miscLinks{
+    position: relative;
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .futureGatewaysDetails.active {
@@ -212,14 +244,16 @@ section#banner img {
 }
 
 .searchBar input {
-    background: #ADADAD;
-    color: #f3f3f3;
+    background: #fff;
+    color: #000;
     border: none;
-    grid-column: 1/ span 2;
-    font-size: 16px;
-    text-indent: 5px;
+    /* grid-column: 1/ span 2; */
+    font-size: 11px;
+    /* text-indent: 5px; */
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px 5px 0;
+    text-align: left;
+    -webkit-appearance: none;
 }
 
 button {
@@ -442,7 +476,35 @@ section#upperFooter li {
 span.seperator {
     vertical-align: text-top;
 }
-
+.searchBar article label {
+    position: absolute;
+    color: #000;
+    font-size: 12px;
+    top: 8px;
+    left: 50px;
+    width: 100%;
+    transform: translateX(-55%);
+    font-weight: 700;
+}
+#searchBar2 article label{
+    left: 45px;
+}
+.searchBar article  {
+    position: relative;
+    display: inline-grid;
+    padding: 10px;
+}
+.searchBar span{
+    color:#fff;
+    background: #DE3151;
+    border-radius: 35px;
+    font-size: 15px;
+    margin: 5px;
+    text-align: center;
+    align-items: center;
+    padding: 20px 0px;
+    cursor: pointer;
+}
 @media only screen and (min-width:768px) {
     .desk {
         display: block;
@@ -469,11 +531,14 @@ span.seperator {
 
     ul#cityCards,
     #shopAirbnb {
-        display: flex;
+        display: grid;
         list-style: none;
         gap: 20px;
+        grid-template-columns: auto auto auto auto;
     }
-
+    #shopAirbnb{
+        grid-template-columns: auto auto;  
+    }
     ul#cityCards li,
     #experiencesCard li,
     #shopAirbnb article,
@@ -487,7 +552,7 @@ span.seperator {
         justify-content: space-between;
         flex-direction: row;
         gap: 60px;
-        position: static;
+        /* position: static; */
         top: auto;
         left: auto;
         height: auto;
@@ -546,10 +611,6 @@ span.seperator {
         padding: 0 15px 20px;
     }
 
-    .searchBar input {
-        grid-column: 1/ span 5;
-    }
-
     header nav {
         display: flex;
         flex-wrap: wrap;
@@ -561,7 +622,11 @@ span.seperator {
     }
 
     .searchBar {
-        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-columns: auto auto auto auto auto;
+    }
+    #searchBar2{
+        grid-template-columns: auto auto auto auto;
+        max-width: 55%;
     }
 
     section#banner {

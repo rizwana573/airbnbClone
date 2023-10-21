@@ -1,3 +1,152 @@
 header{
     padding-bottom: 20px;
 }
+div#gifLoader {
+    max-width: 20vw;
+    margin: 4vw auto;
+}
+li.hotelDiv {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid #E5E7EB;
+    padding: 35px 0;
+    align-items: center;
+}
+span.like {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 45%;
+    right: 0;
+    cursor: pointer;
+}
+span.like.liked {
+    color: red;
+}
+span.like:hover{
+    opacity:0.5;
+}
+article.propertyDiv {
+    position: relative;
+}
+h1#errorDiv {
+    text-align: center;
+    color: #DE3151;
+    font-size: 25px;
+    margin: 45px auto;
+    min-height: 40vh;
+}
+ul#searchResults {
+    max-width: 60vw;
+}
+
+div#locationResults {
+    margin: 20px auto 30px;
+    font-size: 16px;
+    color: #6B7280;
+}
+
+img.hotelImage {
+    border-radius: 8px;
+}
+
+.propAndCity {
+    font-size: 16px;
+    color: #6B7280;
+}
+
+
+h1.title {
+    color: #374151;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+span.amenities {
+    grid-column: 1/span 4;
+}
+
+article.amenitiesDiv {
+    display: grid;
+    gap: 4px 5px;
+    grid-template-columns: auto auto auto auto auto;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #6B7280;
+    align-items: center;
+    margin: 20px auto 25px;
+    position: relative;
+    padding: 20px 0;
+}
+
+article.amenitiesDiv::before {
+    content:"";
+    width: 60px;
+    border-top: 1.5px solid #E5E7EB;
+    position: absolute;
+    top: 0px;
+}
+article.amenitiesDiv::after {
+    content:"";
+    width: 60px;
+    border-bottom: 1.5px solid #E5E7EB;
+    position: absolute;
+    bottom: 0px;
+}
+span.propertyType, span.noOfBedRooms, span.noOfBaths {
+    position:relative;
+    padding: 0 5px;
+}
+
+
+span.propertyType::after, span.noOfBedRooms::after{
+  content:".";
+  font-size:20px;
+  position: absolute;
+  bottom: 3px;
+  right: -4px;
+}
+span.propertyType::before, span.noOfBaths::before{
+  content:".";
+  font-size:20px;
+  position: absolute;
+  bottom: 3px;
+  left: -4px;
+}
+
+
+
+article.ratingsDiv {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+span.hotelImage {
+    width: 30vw;
+    height: 20vw;
+    display: inline-flex;
+    border-radius: 8px;
+}
+span.rating {
+    position: relative;
+}
+span.rating::after {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background: url(./images/star.svg) no-repeat;
+    display: inline-block;
+    background-position: center;
+    background-size: auto;
+    margin: 0px 0px 0 5px;
+    vertical-align: top;
+}
+span.noOfGuests {
+    padding-right: 5px;
+}
+
+span.noOfBeds {
+    padding: 0 5px;
+}
+/* pagination css */
