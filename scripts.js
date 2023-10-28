@@ -30,20 +30,33 @@ function showSearchBar() {
 function formSubmit(){
     let submit1 = document.getElementById("submit1");
     submit1.addEventListener("click", function () {
+      
         let enteredLocation = document.getElementById("location").value;
         let checkIn = document.getElementById("checkIn").value;
         let checkOut = document.getElementById("checkOut").value;
         let guests = document.getElementById("guests").value;
         let todayDate = new Date().toISOString().slice(0, 10);
 
-        //console.log(enteredLocation, checkIn, checkOut, guests);
-        localStorage.setItem("enteredLocation", enteredLocation);
+        const userInputs = {
+          enteredLocation : enteredLocation,
+          checkIn: checkIn,
+          checkOut:checkOut,
+          guests: guests,
+          todayDate: todayDate
+        }
+        
+        /*localStorage.setItem("enteredLocation", enteredLocation);
         localStorage.setItem("checkIn", checkIn);
         localStorage.setItem("checkOut", checkOut); 
         localStorage.setItem("guests", guests); 
-        localStorage.setItem("todayDate", todayDate); 
-        window.location.pathname = "/airbnbClone/searchLanding.html"; 
-        if(window.location.pathname == "/airbnbClone/searchLanding.html"){
+        localStorage.setItem("todayDate", todayDate); */
+        localStorage.setItem("userInputs", JSON.stringify(userInputs));
+        if (location.hostname === "localhost" || location.hostname === "127.0.0.1"){
+          window.location.pathname = "/searchLanding.html"; 
+        }else{
+          window.location.pathname = "/airbnbClone/searchLanding.html"; 
+        }
+        if(window.location.pathname == "/airbnbClone/searchLanding.html" || window.location.pathname == "/searchLanding.html"){
             window.location.reload();
         }     
     });    

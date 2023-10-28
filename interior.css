@@ -56,6 +56,10 @@ img.hotelImage {
     font-size: 16px;
     color: #6B7280;
 }
+#map {
+    height: 400px;
+    width: 100%;
+}
 
 
 h1.title {

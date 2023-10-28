@@ -659,7 +659,11 @@ span.seperator {
     }
 
     main {
-        padding: 0 40px 20px;
+        display: flex;
+        align-items: self-start;
+        gap: 20px;
+        justify-content: space-between;
+        padding: 0 0 20px 40px;
     }
 
     footer {

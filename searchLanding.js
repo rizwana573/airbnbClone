@@ -1,12 +1,40 @@
-let searchLocation = localStorage.getItem("enteredLocation");
-let searchCheckIn = localStorage.getItem("checkIn");
-let searchCheckOut = localStorage.getItem("checkOut");
-let searchGuests = localStorage.getItem("guests");
-let todayDate = localStorage.getItem("todayDate");
+// AIzaSyAeFljFOIE6mudnCS-5Hy1SU2xyXlg7NH4
+
+let newObj = JSON.parse(localStorage.getItem("userInputs"));
+
+let searchLocation = newObj.enteredLocation;
+let searchCheckIn = newObj.checkIn;;
+let searchCheckOut = newObj.checkOut;
+let searchGuests = newObj.guests;
+let todayDate = newObj.todayDate;
 
 const numberPerPage = 10;
 var pageNumber = 1;
 var numberOfPages = 4;
+
+
+// let map;
+
+// function initMap() {
+//     map = new google.maps.Map(document.getElementById("map"), {
+//         center: { lat: -34.397, lng: 150.644 }, // Centered at some default location
+//         zoom: 8
+//     });
+// }
+
+// let userLocation;
+
+// window.onload = () => {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(position => {
+//             userLocation = {
+//                 lat: position.coords.latitude,
+//                 lng: position.coords.longitude
+//             };
+//         });
+//     }
+// }
+
 
 const url =
   `https://airbnb13.p.rapidapi.com/search-location?page=${pageNumber}&limit=${numberPerPage}&location=${searchLocation}&checkin=${searchCheckIn}&checkout=${searchCheckOut}&adults=${searchGuests}&children=0&infants=0&pets=0&currency=USD`;
@@ -30,6 +58,8 @@ async function getData() {
     console.log(result.results);
     renderData(result.results);
     likeHotel();
+
+    
    // pagination();
   } catch (error) {
     console.error(error);
@@ -147,9 +177,38 @@ function renderData(arrayOfHotels) {
     hotelDiv.appendChild(imageDiv);
     hotelDiv.appendChild(detailsDiv);
     searchResults.appendChild(hotelDiv);
+
+    const lat = hotel.lat;
+    const lng = hotel.lng;
+    const map = document.getElementById("mapFrame");
+    map.setAttribute("src", `https://maps.google.com/maps?q=${lat},${lng}&output=embed`);
+    //render map
+  //   new google.maps.Marker({
+  //     position: { lat: hotel.lat, lng: hotel.lng },
+  //     map,
+  //     title: hotel.title
+  // });
+
+    // Add a directions button
+    /*const directionsButton = document.createElement("button");
+    directionsButton.innerText = "Get Directions";
+    directionsButton.addEventListener("click", function() {
+        openDirections(hotel.address);
+    });
+    searchResults.appendChild(directionsButton);*/
+
   });
 }
 getData();
+
+
+
+//get directions
+/*function openDirections(location) {
+  // Open Google Maps directions in a new tab
+  const url = `https://www.google.com/maps/dir/${geolocation.latitude,geolcation.longitude}/${location.latitude},${location.longitude}`;
+  window.open(url, "_blank");
+}*/
 
 // pagination
 // Add event listeners to the prev button
