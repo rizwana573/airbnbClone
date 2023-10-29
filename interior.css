@@ -51,7 +51,17 @@ div#locationResults {
 img.hotelImage {
     border-radius: 8px;
 }
-
+#closeModal{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 15px;
+    padding: 4px 14px;
+    border: 1px solid;
+}
+#closeModal:hover{
+  opacity:0.5;
+}
 .propAndCity {
     font-size: 16px;
     color: #6B7280;
@@ -60,7 +70,10 @@ img.hotelImage {
     height: 400px;
     width: 100%;
 }
-
+div#mapFrame {
+    width: 20vw;
+    height: 50vw;
+}
 
 h1.title {
     color: #374151;

@@ -1,9 +1,10 @@
 // AIzaSyAeFljFOIE6mudnCS-5Hy1SU2xyXlg7NH4
+//AIzaSyDAGTC3AS-_Imk7o6S1s__F3l515y4oFFI
 
 let newObj = JSON.parse(localStorage.getItem("userInputs"));
 
 let searchLocation = newObj.enteredLocation;
-let searchCheckIn = newObj.checkIn;;
+let searchCheckIn = newObj.checkIn;
 let searchCheckOut = newObj.checkOut;
 let searchGuests = newObj.guests;
 let todayDate = newObj.todayDate;
@@ -12,45 +13,59 @@ const numberPerPage = 10;
 var pageNumber = 1;
 var numberOfPages = 4;
 
+// Initialize and add the map
+let map;
+let position = [];
 
-// let map;
+async function initMap() {
+  // Request needed libraries.
+  //@ts-ignore
+  const { Map } = await google.maps.importLibrary("maps");
+  //const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-// function initMap() {
-//     map = new google.maps.Map(document.getElementById("map"), {
-//         center: { lat: -34.397, lng: 150.644 }, // Centered at some default location
-//         zoom: 8
-//     });
-// }
+  // The map, centered at Delhi
+  map = new Map(document.getElementById("mapFrame"), {
+    zoom: 12,
+    center: position[0],
+    mapId: "DEMO_MAP_ID",
+  });
 
-// let userLocation;
+  // Create an info window to share between markers.
+  const infoWindow = new google.maps.InfoWindow();
 
-// window.onload = () => {
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(position => {
-//             userLocation = {
-//                 lat: position.coords.latitude,
-//                 lng: position.coords.longitude
-//             };
-//         });
-//     }
-// }
+  // Create the markers.
+  position.forEach((hotelPosition) => {
+    const marker = new google.maps.Marker({
+      position: hotelPosition,
+      map: map,
+      title:hotelPosition.title,
+      optimized: false,
+    });
 
+    // Add a click listener for each marker, and set up the info window.
+    marker.addListener("click", () => {
+      infoWindow.close();
+      infoWindow.setContent(marker.getTitle());
+      infoWindow.open(map, marker);
+    });
+  });
 
-const url =
-  `https://airbnb13.p.rapidapi.com/search-location?page=${pageNumber}&limit=${numberPerPage}&location=${searchLocation}&checkin=${searchCheckIn}&checkout=${searchCheckOut}&adults=${searchGuests}&children=0&infants=0&pets=0&currency=USD`;
+}
+
+const url = `https://airbnb13.p.rapidapi.com/search-location?page=${pageNumber}&limit=${numberPerPage}&location=${searchLocation}&checkin=${searchCheckIn}&checkout=${searchCheckOut}&adults=${searchGuests}&children=0&infants=0&pets=0&currency=USD`;
 // const url =  `https://jsonplaceholder.typicode.com/posts?_page=${pageNumber}&results=${numberPerPage}`;
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "c202adeb7dmshaff65564b4ff496p1470b6jsnc211fad2b159",
+    "X-RapidAPI-Key": "4c8d38ced0mshc58d6e33f48d990p1b23fcjsn67daf9e1d428",
     "X-RapidAPI-Host": "airbnb13.p.rapidapi.com",
   },
 };
 
 const arrayOfHotels = [];
 async function getData() {
-    let gifLoader = document.getElementById("gifLoader");
-    gifLoader.style.display="block";
+  let gifLoader = document.getElementById("gifLoader");
+  gifLoader.style.display = "block";
   try {
     const response = await fetch(url, options);
     const result = await response.json();
@@ -58,31 +73,43 @@ async function getData() {
     console.log(result.results);
     renderData(result.results);
     likeHotel();
-
-    
-   // pagination();
   } catch (error) {
     console.error(error);
     let errorDiv = document.createElement("h1");
     errorDiv.id = "errorDiv";
     errorDiv.innerText = "No results found! Kindly verify the search queries";
-    if(searchLocation=='' || searchCheckIn ==''  || searchCheckOut == ''  ||searchGuests=='' ){
-        errorDiv.innerText = "Please fill all the fields!!";  
-    }
-    else if (searchCheckIn<todayDate || searchCheckOut<searchCheckIn){
-        errorDiv.innerText = "Check-in or check-out dates cannot be in the past!!";
+    if (
+      searchLocation == "" ||
+      searchCheckIn == "" ||
+      searchCheckOut == "" ||
+      searchGuests == ""
+    ) {
+      errorDiv.innerText = "Please fill all the fields!!";
+    } else if (searchCheckIn < todayDate || searchCheckOut < searchCheckIn) {
+      errorDiv.innerText =
+        "Check-in or check-out dates cannot be in the past!!";
     }
     document.getElementById("hotelSection").append(errorDiv);
-  }
-  finally{
-    gifLoader.style.display="none";
+  } finally {
+    gifLoader.style.display = "none";
   }
 }
- // render Data from the API and build the HTML structure
+// render Data from the API and build the HTML structure
 function renderData(arrayOfHotels) {
-    document.getElementById("locationResults").innerText = arrayOfHotels.length + "+ stays in " + searchLocation;
+  document.getElementById("locationResults").innerText =
+    arrayOfHotels.length + "+ stays in " + searchLocation;
   const searchResults = document.getElementById("searchResults");
+
+  // Clear the existing positions
+  position = [];
+
   arrayOfHotels.forEach((hotel) => {
+    position.push({
+      lat: hotel.lat,
+      lng: hotel.lng,
+      title: hotel.name,
+    });
+
     const hotelDiv = document.createElement("li");
     hotelDiv.classList.add("hotelDiv");
     const imageDiv = document.createElement("article");
@@ -131,11 +158,11 @@ function renderData(arrayOfHotels) {
     const isSuperHost = document.createElement("span");
 
     title.innerText = hotel.name;
-    hotelImage.style.background= `url(${hotel.images[0]}) no-repeat center / cover`;
-    price.innerText = hotel.price.currency + hotel.price.rate ;
+    hotelImage.style.background = `url(${hotel.images[0]}) no-repeat center / cover`;
+    price.innerText = hotel.price.currency + hotel.price.rate;
     propAndCity.innerText = hotel.type + " in " + hotel.city;
-    like.innerText="♡";
-    // like.style.background=`url("./images/heart.svg") no-repeat center / cover`; 
+    like.innerText = "♡";
+    // like.style.background=`url("./images/heart.svg") no-repeat center / cover`;
 
     propertyType.innerText = hotel.type;
 
@@ -144,11 +171,11 @@ function renderData(arrayOfHotels) {
     noOfBedRooms.innerText = hotel.bedrooms + " bedrooms";
     noOfGuests.innerText = hotel.persons + " guests";
     amenities.innerText = hotel.previewAmenities.join(" . ");
-    if(hotel.rating!=null){
-        rating.innerText = hotel.rating;
-    }else{
-        rating.innerText = "no rating";
-    }  
+    if (hotel.rating != null) {
+      rating.innerText = hotel.rating;
+    } else {
+      rating.innerText = "no rating";
+    }
     reviewsCount.innerText = "(" + hotel.reviewsCount + " reviews)";
     city.innerText = hotel.city;
     isSuperHost.innerText = hotel.isSuperHost ? "yes" : "no";
@@ -159,7 +186,7 @@ function renderData(arrayOfHotels) {
     propertyDiv.appendChild(title);
     propertyDiv.appendChild(like);
     detailsDiv.appendChild(propertyDiv);
-    
+
     amenitiesDiv.appendChild(noOfGuests);
     amenitiesDiv.appendChild(propertyType);
     amenitiesDiv.appendChild(noOfBedRooms);
@@ -171,77 +198,101 @@ function renderData(arrayOfHotels) {
     ratingsDiv.appendChild(rating);
     ratingsDiv.appendChild(reviewsCount);
     //ratingsDiv.appendChild(isSuperHost);
-    ratingsDiv.appendChild(price);   
+    // Add a button for booking cost breakdown
+    const costButton = document.createElement("button");
+    costButton.innerText = "Cost Breakdown";
+    costButton.addEventListener("click", () => showBookingCostBreakdown(hotel));
+    //searchResults.appendChild(costButton);
+    ratingsDiv.appendChild(costButton);
     detailsDiv.appendChild(ratingsDiv);
 
     hotelDiv.appendChild(imageDiv);
     hotelDiv.appendChild(detailsDiv);
-    searchResults.appendChild(hotelDiv);
+    
 
-    const lat = hotel.lat;
-    const lng = hotel.lng;
-    const map = document.getElementById("mapFrame");
-    map.setAttribute("src", `https://maps.google.com/maps?q=${lat},${lng}&output=embed`);
-    //render map
-  //   new google.maps.Marker({
-  //     position: { lat: hotel.lat, lng: hotel.lng },
-  //     map,
-  //     title: hotel.title
-  // });
 
     // Add a directions button
-    /*const directionsButton = document.createElement("button");
+    const directionsButton = document.createElement("button");
+    directionsButton.id="directionsBtn";
     directionsButton.innerText = "Get Directions";
     directionsButton.addEventListener("click", function() {
-        openDirections(hotel.address);
+        openDirections(hotel);
     });
-    searchResults.appendChild(directionsButton);*/
+    hotelDiv.appendChild(directionsButton);
+    searchResults.appendChild(hotelDiv);
 
   });
+  console.log(position, position);
+  initMap();
 }
 getData();
 
-
-
 //get directions
-/*function openDirections(location) {
-  // Open Google Maps directions in a new tab
-  const url = `https://www.google.com/maps/dir/${geolocation.latitude,geolcation.longitude}/${location.latitude},${location.longitude}`;
-  window.open(url, "_blank");
-}*/
+function openDirections(location) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      // Open Google Maps directions from the user's current location to the hotel's location
+      const url = `https://www.google.com/maps/dir/${userLocation.lat},${userLocation.lng}/${location.lat},${location.lng}`;
+      window.open(url, "_blank");
+    });
+  } else {
+    alert("Geolocation is not supported by your browser.");
+  }
+}
 
-// pagination
-// Add event listeners to the prev button
-const prev = document.querySelector('.prev');
-prev.addEventListener('click', (e) => {
-   e.preventDefault();
-   if (pageNumber > 1) {
-      pageNumber--;
-      getData(pageNumber);
-   }
-});
-// Add event listeners to the next button
-const next = document.querySelector(".next");
-next.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (pageNumber < numberOfPages) {
-        pageNumber++;
-        getData(pageNumber);
-    }
-});
+function showBookingCostBreakdown(hotel) {
+  // Calculate additional fees and total cost
+  const additionalFees = hotel.price.rate * 0.10; // Assuming additional fees are 10% of base price
+  const totalCost = hotel.price.rate + additionalFees;
+
+  // Create a modal dialog box
+  const modal = document.createElement("div");
+  modal.style.display = "block";
+  modal.style.width = "300px";
+  modal.style.height = "200px";
+  modal.style.backgroundColor = "#fff";
+  modal.style.position = "fixed";
+  modal.style.top = "50%";
+  modal.style.left = "50%";
+  modal.style.transform = "translate(-50%, -50%)";
+  modal.style.padding = "20px";
+  modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
+
+  // Add booking cost breakdown to the modal
+  modal.innerHTML = `
+      <h2>Booking Cost Breakdown</h2>
+      <p>Base Rate: $${hotel.price.rate.toFixed(2)}</p>
+      <p>Additional Fees: $${additionalFees.toFixed(2)}</p>
+      <p>Total Cost: $${totalCost.toFixed(2)}</p>
+  `;
+
+  // Add a close button to the modal
+  const closeButton = document.createElement("button");
+  closeButton.innerText = "X";
+  closeButton.id = "closeModal";
+  closeButton.addEventListener("click", () => modal.style.display = "none");
+  modal.appendChild(closeButton);
+
+  // Add the modal to the body
+  document.body.appendChild(modal);
+}
+
 
 //like button functionality
-function likeHotel(){
-    let like = document.getElementsByClassName("like");
-    for(let i=0;i<like.length;i++){
-      like[i].addEventListener("click", function(){
-          like[i].classList.toggle("liked");
-          if(like[i].classList.contains("liked")){
-              like[i].innerHTML="❤"; 
-          }
-          else{
-              like[i].innerHTML="♡";
-          }
-        });  
-    }
+function likeHotel() {
+  let like = document.getElementsByClassName("like");
+  for (let i = 0; i < like.length; i++) {
+    like[i].addEventListener("click", function () {
+      like[i].classList.toggle("liked");
+      if (like[i].classList.contains("liked")) {
+        like[i].innerHTML = "❤";
+      } else {
+        like[i].innerHTML = "♡";
+      }
+    });
+  }
 }
