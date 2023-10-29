@@ -657,8 +657,11 @@ span.seperator {
     #aboutHosting span.welcomeText {
         left: 20%;
     }
+    main{
+        padding: 0 40px;
+    }
 
-    main {
+    .searchLanding main {
         display: flex;
         align-items: self-start;
         gap: 20px;
